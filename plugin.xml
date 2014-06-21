@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+		point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFolder"
+            id="LayoutInspector.contribution1">
+         <menu
+               label="Layout Inspector"
+               path="additions"
+               id="LayoutInspector.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Inspect this folder"
+               class="layoutinspector.popup.actions.InspectFolderAction"
+               menubarPath="LayoutInspector.menu1/group1"
+               enablesFor="1"
+               id="LayoutInspector.newAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="LayoutInspector.contribution2"
+            nameFilter="*.xml">
+         <menu
+               label="Layout Inspector"
+               path="additions"
+               id="LayoutInspector.menu2">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               label="Inspect this file"
+               class="layoutinspector.popup.actions.InspectFileAction"
+               menubarPath="LayoutInspector.menu2/group2"
+               enablesFor="1"
+               id="LayoutInspector.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="LayoutInspector"
+            name="Layout Inspector">
+      </category>
+      <view
+            category="LayoutInspector"
+            class="layoutinspector.views.LayoutInspectorView"
+            icon="icons/sample.gif"
+            id="layoutinspector.views.LayoutInspectorView"
+            name="Layout Inspector View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="layoutinspector.views.LayoutInspectorView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.ProblemView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>

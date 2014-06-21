@@ -1,7 +1,7 @@
 /**
- * @file XmlAttr.java
- * @brief Class for xml attributes.
- * @author Sylvain DANGIN
+ * @file Tuple.java
+ * @brief Class for tuples.
+ * @author Sylvain DANGIN.
  * @version 0.1
  * @date 6/17/2014
  * @copyright Copyright (c) 2014, Sylvain DANGIN\n
@@ -27,49 +27,35 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package libs;
+
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @class XmlAttr
- * @brief Class for xml attributes.
+ * @class Tuple
+ * @brief Class for tuples.
  */
-public class XmlAttr
+public class Tuple
 {
-	/** @brief Used to generate a unique id. */
-	private static AtomicInteger idGenerator = new AtomicInteger();
-	/** @brief Id of the key/value combination. */
-	public int id;
-	/** @brief Key of the attribute. */
-	public String key;
-	/** @brief Value of the attribute. */
-	public String value;
-	/** @brief Number of occurences. */
-	public int count = 0;
+	/** @brief Number of occurences of this tuple. */
+	public int count;
+	/** @brief Unique tag of the tuple. */
+	public String tag;
+	/** @brief List of xml attributes for the tuple. */
+	public ArrayList<XmlAttr> attrList;
 	/** @brief List of files containing the key/value combination. */
 	public ArrayList<String> files;
 	
 	/**
-	 * @brief Empty constructor.
-	 */
-	public XmlAttr()
-	{
-		this("", "");
-	}
-	
-	/**
 	 * @brief Constructor of the class.
-	 * @param key Key of the attribute.
-	 * @param value Value of the attribute.
 	 */
-	public XmlAttr(String key, String value)
+	public Tuple()
 	{
-		this.key = key;
-		this.value = value;
-		id = idGenerator.getAndIncrement();
+		count = 1;
+		attrList = new ArrayList<XmlAttr>();
 		files = new ArrayList<String>();
 	}
-	
+
 	/** 
 	 * @brief Add a file containing this combination.
 	 */
@@ -77,15 +63,5 @@ public class XmlAttr
 	{
 		if (!files.contains(file))
 			files.add(file);
-	}
-	
-	/**
-	 * @brief Test with combination.
-	 * @param testKey Key to test.
-	 * @param testValue Value to test.
-	 */
-	public boolean equals(String testKey, String testValue)
-	{
-		return key.equals(testKey) && value.equals(testValue);
 	}
 }

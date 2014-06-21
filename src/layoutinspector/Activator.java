@@ -1,7 +1,7 @@
 /**
- * @file Tuple.java
- * @brief Class for tuples.
- * @author Sylvain DANGIN.
+ * @file Activator.java
+ * @author Sylvain DANGIN
+ * @brief Activator of the plugin.
  * @version 0.1
  * @date 6/17/2014
  * @copyright Copyright (c) 2014, Sylvain DANGIN\n
@@ -27,39 +27,67 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import java.util.ArrayList;
+package layoutinspector;
+
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
 
 /**
- * @class Tuple
- * @brief Class for tuples.
+ * @class Activator
+ * @brief Activator of the plugin.
  */
-public class Tuple
+public class Activator extends AbstractUIPlugin
 {
-	/** @brief Number of occurences of this tuple. */
-	public int count;
-	/** @brief Unique tag of the tuple. */
-	public String tag;
-	/** @brief List of xml attributes for the tuple. */
-	public ArrayList<XmlAttr> attrList;
-	/** @brief List of files containing the key/value combination. */
-	public ArrayList<String> files;
+	/** @brief Plugin id */
+	public static final String PLUGIN_ID = "fr.sdangin.layoutinspector";
+	/** @brief Instance. */
+	private static Activator plugin;
 	
 	/**
-	 * @brief Constructor of the class.
+	 * @brief Constructor.
 	 */
-	public Tuple()
+	public Activator()
 	{
-		count = 1;
-		attrList = new ArrayList<XmlAttr>();
-		files = new ArrayList<String>();
+		
 	}
 
-	/** 
-	 * @brief Add a file containing this combination.
+	/**
+	 * @brief Launch the plugin.
+	 * @param context Context of the plugin.
 	 */
-	public void addFiles(String file)
+	public void start(BundleContext context) throws Exception
 	{
-		if (!files.contains(file))
-			files.add(file);
+		super.start(context);
+		plugin = this;
+	}
+
+	/**
+	 * @brief Stop the plugin.
+	 * @param context Context of the plugin.
+	 */
+	public void stop(BundleContext context) throws Exception
+	{
+		plugin = null;
+		super.stop(context);
+	}
+
+	/**
+	 * @brief Returns the shared instance
+	 * @return The shared instance.
+	 */
+	public static Activator getDefault()
+	{
+		return plugin;
+	}
+
+	/**
+	 * @biref Returns an image descriptor for the image file at the given plug-in relative path
+	 * @param path The path.
+	 * @return The image descriptor.
+	 */
+	public static ImageDescriptor getImageDescriptor(String path)
+	{
+		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 }

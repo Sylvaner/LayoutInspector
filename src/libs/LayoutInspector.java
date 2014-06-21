@@ -28,6 +28,8 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package libs;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,7 +82,7 @@ public class LayoutInspector
 			parseFile(filePath);
 		
 		// Sort result
-		Collections.sort(tupleList, new Comparator<Tuple>() {
+/*		Collections.sort(tupleList, new Comparator<Tuple>() {
 			public int compare(Tuple o1, Tuple o2) {
 				if (o1.attrList.size() > o2.attrList.size())
 					return -1;
@@ -89,7 +91,7 @@ public class LayoutInspector
 				return o2.count - o1.count; 
 				
 			}
-		});
+		});*/
 	}
 	
 	/**
