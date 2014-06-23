@@ -160,10 +160,16 @@ A part of the result for this file :
 Setup
 =====
 
-1. Download the plugin [LayoutInspector_1.0.0.201406211518.jar](https://github.com/Sylvaner/LayoutInspector/blob/master/LayoutInspector_1.0.0.201406211518.jar).
+1. Download the plugin [LayoutInspector_1.1.0.201406211518.jar](https://github.com/Sylvaner/LayoutInspector/raw/master/LayoutInspector_1.1.0.201406211518.jar).
 2. Copy this file in the plugin directory of your Eclipse installation.
 3. Right click on the folder you want to scan. Layout Inspector -> Inspect this folder.
 4. See the result in the view.
+
+Changelog
+=========
+
+1.1 - Double click on a file in resultst open it.
+1.0 - First release.
 
 Licence
 =======
