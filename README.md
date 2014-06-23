@@ -155,7 +155,7 @@ Example
 
 A part of the result for this file : 
 
-![Result example](http://www.sdangin.fr/git/example_eclipse.png)
+![Result example](http://www.sdangin.fr/git/example_eclipe.png)
 
 Setup
 =====
