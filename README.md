@@ -169,6 +169,7 @@ Changelog
 =========
 
 1.1 - Double click on a file in resultst open it.
+
 1.0 - First release.
 
 Licence
