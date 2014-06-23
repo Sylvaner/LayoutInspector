@@ -49,7 +49,7 @@ class TreeParent extends TreeObject
 	 */
 	public TreeParent(String name, int data)
 	{
-		super(name, data);
+		super(name, data, NodeType.PARENT);
 		children = new ArrayList<TreeObject>();
 	}
 	

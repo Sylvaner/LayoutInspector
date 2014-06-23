@@ -41,6 +41,8 @@ class TreeObject implements IAdaptable
 {
 	/** @brief Numeric data used for sort. */
 	private int data;
+	/** @brief Type of the node. */
+	private NodeType type;
 	/** @brief Showed name of the node. */
 	private String name;
 	/** @brief Parent of the node. */
@@ -51,10 +53,11 @@ class TreeObject implements IAdaptable
 	 * @param name Name of the node.
 	 * @param data Data of the node.
 	 */
-	public TreeObject(String name, int data)
+	public TreeObject(String name, int data, NodeType type)
 	{
 		this.name = name;
 		this.data = data;
+		this.type = type;
 	}
 	
 	/**
@@ -76,12 +79,39 @@ class TreeObject implements IAdaptable
 	}
 	
 	/**
+	 * @brief Name setter.
+	 * @param name Name of the node
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	/**
 	 * @brief Name getter.
 	 * @return Name of the node.
 	 */
 	public String getName()
 	{
 		return name;
+	}
+	
+	/**
+	 * @brief Type setter.
+	 * @param type Type of the node
+	 */
+	public void setType(NodeType type)
+	{
+		this.type = type;
+	}
+	
+	/**
+	 * @brief Type getter.
+	 * @return Type of the node.
+	 */
+	public NodeType getType()
+	{
+		return type;
 	}
 	
 	/**
@@ -113,9 +143,10 @@ class TreeObject implements IAdaptable
 	
 	/**
 	 * @brief Get adapter of the object.
-	 * @param key ???
+	 * @param adapter Class of the adapter.
 	 */
-	public Object getAdapter(Class key)
+	@SuppressWarnings("rawtypes")
+	public Object getAdapter(Class adapter)
 	{
 		return null;
 	}

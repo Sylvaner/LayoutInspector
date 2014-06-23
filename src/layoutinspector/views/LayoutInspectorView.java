@@ -37,16 +37,25 @@ import java.util.Map;
 import libs.Tuple;
 import libs.XmlAttr;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -187,12 +196,12 @@ public class LayoutInspectorView extends ViewPart
 						TreeParent filesNode = new TreeParent("Files", 0);
 						for (XmlAttr attr : tuple.attrList)
 						{
-							TreeObject attrNode = new TreeObject(attr.key+"=\""+attr.value+"\"", 0);
+							TreeObject attrNode = new TreeObject(attr.key+"=\""+attr.value+"\"", 0, NodeType.ATTRIBUTE);
 							attrsNode.addChild(attrNode);
 						}
 						for (String file : tuple.files)
 						{
-							TreeObject fileNode = new TreeObject(file, 0);
+							TreeObject fileNode = new TreeObject(file, 0, NodeType.FILE);
 							filesNode.addChild(fileNode);
 						}
 						resultNode.addChild(filesNode);
@@ -261,7 +270,28 @@ public class LayoutInspectorView extends ViewPart
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
 		viewer.setInput(getViewSite());		
-		
+		viewer.addDoubleClickListener(new IDoubleClickListener(){
+			public void doubleClick(DoubleClickEvent event) {
+				TreeSelection treeSelection = (TreeSelection)event.getSelection();
+				if (treeSelection.getFirstElement() instanceof TreeObject)
+				{
+					TreeObject treeObject = (TreeObject)treeSelection.getFirstElement();
+					if (treeObject.getType() == NodeType.FILE)
+					{
+						final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(Path.fromOSString(treeObject.getName()));
+						if (file != null)
+						{
+							IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+							 try {
+								IDE.openEditor(page, file , true);
+							} catch (PartInitException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+				
+			}});
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "fr.sdangin.layoutinspector.viewer");
 	}
 
